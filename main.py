@@ -9,6 +9,10 @@ def main():
     pygame.init();
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT));
 
+    clock =  pygame.time.Clock();
+    delta_time = 0;
+
+
     # game loop
     while(1):
         for event in pygame.event.get():
@@ -17,7 +21,7 @@ def main():
     
         screen.fill((0,0,0));
         pygame.display.flip();
-
-
+        delta_time = clock.tick(60);
+        
 if __name__ == "__main__":
     main();
