@@ -9,12 +9,15 @@ def main():
 
     pygame.init();
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT));
-    player = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+    player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
 
     clock =  pygame.time.Clock();
     delta_time = 0;
 
+    updatable_group = pygame.sprite.Group(player);
+    drawable_group = pygame.sprite.Group(player);
 
+    Player.containers = (updatable_group, drawable_group);
     # game loop
     while(1):
         for event in pygame.event.get():
@@ -22,8 +25,13 @@ def main():
                 return;
     
         screen.fill((0,0,0));
-        player.draw(screen);
-        player.update(delta_time);
+
+        for drawable in drawable_group:
+            drawable.draw(screen);
+        
+        for updatable in updatable_group:
+            updatable.update(delta_time);
+        
         pygame.display.flip();
         delta_time = (clock.tick(60)/1000);
         
