@@ -23,6 +23,7 @@ def main():
     
         screen.fill((0,0,0));
         player.draw(screen);
+        player.update(delta_time);
         pygame.display.flip();
         delta_time = clock.tick(60);
         
