@@ -30,7 +30,7 @@ def main():
 
     # game loop
     while(1):
-        for event in pygame.event.get():
+        for event in pygame.event.get(): 
             if(event.type == pygame.QUIT):
                 return;
     
@@ -49,8 +49,13 @@ def main():
             
             for bullet in shot_group:
                 if(not(asteroid.is_not_colliding(bullet))):
-                    pygame.sprite.Sprite.kill(asteroid);
                     pygame.sprite.Sprite.kill(bullet);
+
+                    if(asteroid.radius <= ASTEROID_MIN_RADIUS):
+                         pygame.sprite.Sprite.kill(asteroid);
+                    else:
+                        pygame.sprite.Sprite.kill(asteroid);
+                        asteroid.split(); 
 
         pygame.display.flip();
         delta_time = (clock.tick(60)/1000);
