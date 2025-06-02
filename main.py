@@ -26,7 +26,7 @@ def main():
     Shot.containers = (updatable_group, drawable_group, shot_group);
     
     asteroidfield = AsteroidField();
-    player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+    player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);    
 
     # game loop
     while(1):
@@ -46,7 +46,12 @@ def main():
             if(not (asteroid.is_not_colliding(player))):
                 print('Game over!');
                 return;
-                
+            
+            for bullet in shot_group:
+                if(not(asteroid.is_not_colliding(bullet))):
+                    pygame.sprite.Sprite.kill(asteroid);
+                    pygame.sprite.Sprite.kill(bullet);
+
         pygame.display.flip();
         delta_time = (clock.tick(60)/1000);
         
