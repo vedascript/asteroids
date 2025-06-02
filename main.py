@@ -38,6 +38,11 @@ def main():
         
         for updatable in updatable_group:
             updatable.update(delta_time);
+
+        for asteroid in asteroids_group:
+            if(not (asteroid.is_not_colliding(player))):
+                print('Game over!');
+                return;
                 
         pygame.display.flip();
         delta_time = (clock.tick(60)/1000);
